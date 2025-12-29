@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Njeri NeatRoots Studio | Narok Elite</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <style>
+        :root {
+            --gold: #D4AF37;
+            --dark: #0a0a0a;
+            --white: #ffffff;
+            --glass: rgba(255, 255, 255, 0.05);
+        }
+
+        * { box-sizing: border-box; cursor: none !important; }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            background-color: var(--dark);
+            color: var(--white);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* --- SPARKLING CURSOR --- */
+        #cursor-dot { width: 8px; height: 8px; background: var(--gold); position: fixed; border-radius: 50%; pointer-events: none; z-index: 9999; }
+        #cursor-outline { width: 30px; height: 30px; border: 2px solid var(--gold); position: fixed; border-radius: 50%; pointer-events: none; z-index: 9999; transition: 0.1s ease-out; }
+
+        /* --- NAVIGATION --- */
+        header {
+            position: fixed; width: 100%; padding: 20px 5%;
+            display: flex; justify-content: space-between; align-items: center;
+            z-index: 1000; background: rgba(0,0,0,0.85);
+            backdrop-filter: blur(10px); border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+        }
+        .logo-text { font-family: 'Playfair Display', serif; color: var(--gold); font-size: 1.5rem; letter-spacing: 2px; }
+        .nav-links a { color: white; text-decoration: none; margin-left: 20px; font-size: 0.8rem; text-transform: uppercase; }
+
+        /* --- HERO & WALLPAPER SWAP --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bg-slide {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-size: cover; background-position: center;
+            opacity: 0; transition: opacity 1.5s ease-in-out;
+            z-index: -1;
+        }
+        .bg-slide.active { opacity: 0.4; }
+
+        .hero-content h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.2rem, 8vw, 4.5rem);
+            margin: 0;
+            text-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
+        }
+        .hero-content p { color: var(--gold); letter-spacing: 3px; font-size: 1.1rem; margin-top: 10px; }
+
+        /* --- SECTIONS --- */
+        .section { padding: 100px 8%; }
+        h2 { font-family: 'Playfair Display', serif; font-size: 2.8rem; color: var(--gold); margin-bottom: 40px; text-align: center; }
+
+        /* --- SERVICE GRIDS --- */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; }
+        
+        .glass-card {
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 22px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: 0.4s;
+        }
+        .glass-card:hover { border-color: var(--gold); background: rgba(212, 175, 55, 0.08); transform: scale(1.03); }
+        .price-tag { color: var(--gold); font-weight: bold; font-size: 1.1rem; }
+
+        /* --- BOOKING PLAN SECTION --- */
+        .booking-plan {
+            background: rgba(212, 175, 55, 0.05);
+            padding: 50px 20px;
+            border-radius: 20px;
+            text-align: center;
+            border: 1px solid var(--gold);
+            max-width: 800px;
+            margin: 50px auto;
+        }
+        select, input {
+            padding: 12px;
+            margin: 10px;
+            background: var(--dark);
+            color: white;
+            border: 1px solid var(--gold);
+            border-radius: 5px;
+            width: 80%;
+            max-width: 300px;
+        }
+
+        /* --- BUTTONS --- */
+        .glow-btn {
+            padding: 18px 45px;
+            background: var(--gold);
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 50px;
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+            transition: 0.3s;
+            display: inline-block;
+            text-transform: uppercase;
+            border: none;
+        }
+        .glow-btn:hover { box-shadow: 0 0 30px var(--gold); transform: scale(1.05); color: white; background: black; }
+
+        footer { text-align: center; padding: 60px; border-top: 1px solid rgba(255,255,255,0.1); }
+        
+        @media (max-width: 768px) {
+            * { cursor: auto !important; }
+            #cursor-dot, #cursor-outline { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="cursor-dot"></div>
+    <div id="cursor-outline"></div>
+
+    <header>
+        <div class="logo-text">NJERI NEATROOTS</div>
+        <nav class="nav-links">
+            <a href="#hair">Hair</a>
+            <a href="#nails">Nails</a>
+            <a href="#book">Book Plan</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="bg-slide active" style="background-image: url('https://images.unsplash.com/photo-1600948836101-f9ffda59d250?q=80&w=2036&auto=format&fit=crop');"></div>
+        <div class="bg-slide" style="background-image: url('https://images.unsplash.com/photo-1632345031435-8727f6897d53?q=80&w=2070&auto=format&fit=crop');"></div>
+        <div class="bg-slide" style="background-image: url('https://images.unsplash.com/photo-1522337660859-02fbefca4702?q=80&w=2069&auto=format&fit=crop');"></div>
+
+        <div class="hero-content">
+            <p class="reveal">NAROK | MAASAI MARA UNIVERSITY</p>
+            <h1 class="reveal">All That Glitters<br><span style="color: var(--gold);">Is Made By Njeri</span></h1>
+            <a href="#book" class="glow-btn reveal">Start Your Glow Up</a>
+        </div>
+    </section>
+
+    <section id="hair" class="section">
+        <h2 class="reveal">Njeri's Hair Artistry</h2>
+        <div class="grid">
+            <div class="glass-card reveal"><span>Knotless Braids</span><span class="price-tag">700</span></div>
+            <div class="glass-card reveal"><span>Marley Twists</span><span class="price-tag">600</span></div>
+            <div class="glass-card reveal"><span>Butterfly Locs</span><span class="price-tag">600</span></div>
+            <div class="glass-card reveal"><span>Half Cornrows</span><span class="price-tag">500</span></div>
+            <div class="glass-card reveal"><span>Coco Twists</span><span class="price-tag">500</span></div>
+            <div class="glass-card reveal"><span>Stitch Braids</span><span class="price-tag">500</span></div>
+            <div class="glass-card reveal"><span>Lemonade Braids</span><span class="price-tag">500</span></div>
+            <div class="glass-card reveal"><span>Feed-in Cornrows</span><span class="price-tag">400</span></div>
+            <div class="glass-card reveal"><span>Crotchet</span><span class="price-tag">400</span></div>
+            <div class="glass-card reveal"><span>Twist Outs</span><span class="price-tag">300</span></div>
+            <div class="glass-card reveal"><span>Freehand Cornrows</span><span class="price-tag">150</span></div>
+            <div class="glass-card reveal"><span>Blow-dry</span><span class="price-tag">50</span></div>
+        </div>
+    </section>
+
+    <section id="nails" class="section" style="background: rgba(255,255,255,0.02);">
+        <h2 class="reveal">Njeri's Nail Bar</h2>
+        <div class="grid">
+            <div class="glass-card reveal"><span>Builder Gel</span><span class="price-tag">500</span></div>
+            <div class="glass-card reveal"><span>Tips + Gel</span><span class="price-tag">500</span></div>
+            <div class="glass-card reveal"><span>Stick-ons Gel</span><span class="price-tag">400</span></div>
+            <div class="glass-card reveal"><span>Plain Gel Polish</span><span class="price-tag">300</span></div>
+            <div class="glass-card reveal"><span>Henna</span><span class="price-tag">200</span></div>
+        </div>
+    </section>
+
+    <section id="book" class="section">
+        <div class="booking-plan reveal">
+            <h2 style="font-size: 2rem;">Book Your Glow Plan</h2>
+            <p>Select your service and I'll see you in Narok!</p>
+            <select id="serviceSelect">
+                <option value="Knotless Braids">Knotless Braids (700/-)</option>
+                <option value="Nail Set">Nail Session (300-500/-)</option>
+                <option value="Other Style">Other Hair Style</option>
+            </select><br>
+            <input type="text" id="clientName" placeholder="Enter Your Name"><br>
+            <button class="glow-btn" onclick="sendWhatsApp()">Confirm Via WhatsApp</button>
+            <p style="font-size: 0.8rem; margin-top: 15px; opacity: 0.7;">1-Week Free Repair Policy | 📍 Narok Town & MMU Environs</p>
+        </div>
+    </section>
+
+    <footer>
+        <p class="logo-text" style="font-size: 1.1rem;">NJERI NEATROOTS STUDIO</p>
+        <p>0110987362 | Narok, Kenya</p>
+        <p style="opacity: 0.4; font-size: 0.7rem;">&copy; 2025 All that glitters is made by Njeri.</p>
+    </footer>
+
+    <script>
+        // --- WALLPAPER SWAP ---
+        let slides = document.querySelectorAll('.bg-slide');
+        let currentSlide = 0;
+        setInterval(() => {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }, 5000);
+
+        // --- CURSOR ---
+        const dot = document.getElementById('cursor-dot');
+        const outline = document.getElementById('cursor-outline');
+        window.addEventListener('mousemove', (e) => {
+            dot.style.left = e.clientX + 'px'; dot.style.top = e.clientY + 'px';
+            setTimeout(() => {
+                outline.style.left = e.clientX - 11 + 'px'; outline.style.top = e.clientY - 11 + 'px';
+            }, 60);
+        });
+
+        // --- WHATSAPP BOOKING LOGIC ---
+        function sendWhatsApp() {
+            const name = document.getElementById('clientName').value;
+            const service = document.getElementById('serviceSelect').value;
+            if(!name) { alert("Please enter your name!"); return; }
+            const message = `Hello Njeri! My name is ${name}. I'd like to book a session for ${service} at Maasai Mara University area.`;
+            window.open(`https://wa.me/254110987362?text=${encodeURIComponent(message)}`, '_blank');
+        }
+
+        // --- REVEAL ---
+        ScrollReveal().reveal('.reveal', { delay: 300, distance: '40px', origin: 'bottom', interval: 100 });
+    </script>
+</body>
+</html>
